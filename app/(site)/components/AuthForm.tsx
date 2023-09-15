@@ -2,9 +2,11 @@
 
 import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
-import Input from '@/app/components/Input';
 import { toast } from 'react-hot-toast';
+
+import Input from '@/app/components/Input';
+import Button from '@/app/components/Button';
+import FormItem from './FormItem';
 
 const AuthForm = () => {
   const [variant, setVariant] = useState<'LOGIN' | 'REGISTER'>('LOGIN');
@@ -22,31 +24,23 @@ const AuthForm = () => {
     defaultValues: { name: '', email: '', password: '' }
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (values) => {
-    // console.log(values, 'values');
-    // setIsLoading(true);
-  };
+  const onSubmit: SubmitHandler<FieldValues> = (values) => {};
 
   return (
-    <div>
-      <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
-        <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
-          {/* <Input label='Email' /> */}
-          <button
-            onClick={() => {
-              toast.error('hhhh');
-              // axios.post('/api/register', {
-              //   email: '111@qq.comqwq',
-              //   name: 'kkkaaqk',
-              //   password: '123456hgftdes'
-              // });
-            }}
-          >
-            button
-          </button>
-        </form>
-      </div>
-    </div>
+    <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
+      {/* <FormItem label='Name' name='name'>
+        <Input />
+      </FormItem>
+      <FormItem label='Emial' name='email'>
+        <Input />
+      </FormItem> */}
+      <FormItem label='Password' name='password'>
+        <Input />
+      </FormItem>
+      <Button type='danger' block>
+        Sign in
+      </Button>
+    </form>
   );
 };
 
