@@ -35,7 +35,7 @@ const AuthForm = () => {
         <Input />
       </FormItem> */}
       <FormItem label='Password' name='password'>
-        <Input />
+        <Input onChange={(e) => console.log(e.target.value)} />
       </FormItem>
       <Button type='danger' block>
         Sign in
