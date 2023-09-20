@@ -85,7 +85,7 @@ const AuthForm = () => {
         >
           <Input type='password' />
         </FormItem>
-        <Button type='danger' block disabled={isLoading}>
+        <Button type='primary' block disabled={isLoading}>
           {variant === 'LOGIN' ? 'Sign in' : 'Register'}
         </Button>
       </form>
