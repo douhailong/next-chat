@@ -1,5 +1,5 @@
-import DesktopBar from '@/app/components/DesktopBar';
-import MobileBar from '@/app/components/MobileBar';
+import DesktopBar from '@/app/components/desktop-bar';
+import MobileBar from '@/app/components/mobile-bar';
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   return (

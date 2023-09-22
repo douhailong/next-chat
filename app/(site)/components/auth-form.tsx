@@ -8,20 +8,15 @@ import { BsGithub, BsGoogle } from 'react-icons/bs';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
-import Input from '@/app/components/Input';
-import Button from '@/app/components/Button';
-import FormItem from './FormItem';
-import SocialButton from './SocialButton';
+import Input from '@/app/components/input';
+import Button from '@/app/components/button';
+import FormItem from './form-item';
+import SocialButton from './social-button';
 
 const AuthForm = () => {
   const [variant, setVariant] = useState<'LOGIN' | 'REGISTER'>('LOGIN');
   const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
-
-  const toggle = useCallback(() => {
-    setVariant(variant === 'LOGIN' ? 'REGISTER' : 'LOGIN');
-  }, [variant]);
 
   const {
     register,
@@ -30,6 +25,10 @@ const AuthForm = () => {
   } = useForm<FieldValues>({
     defaultValues: { name: '', email: 'dou@qq.com', password: 'dou123' }
   });
+
+  const toggle = useCallback(() => {
+    setVariant(variant === 'LOGIN' ? 'REGISTER' : 'LOGIN');
+  }, [variant]);
 
   const onSubmit: SubmitHandler<FieldValues> = (values) => {
     console.log(values);
@@ -66,14 +65,29 @@ const AuthForm = () => {
     <div className='space-y-6'>
       <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
         {variant === 'REGISTER' && (
-          <FormItem label='Name' name='name' register={register} errors={errors}>
+          <FormItem
+            label='Name'
+            name='name'
+            register={register}
+            errors={errors}
+          >
             <Input />
           </FormItem>
         )}
-        <FormItem label='Emial' name='email' register={register} errors={errors}>
+        <FormItem
+          label='Emial'
+          name='email'
+          register={register}
+          errors={errors}
+        >
           <Input />
         </FormItem>
-        <FormItem label='Password' name='password' register={register} errors={errors}>
+        <FormItem
+          label='Password'
+          name='password'
+          register={register}
+          errors={errors}
+        >
           <Input type='password' />
         </FormItem>
         <Button type='primary' block disabled={isLoading}>
@@ -85,7 +99,9 @@ const AuthForm = () => {
           <div className='w-full border-t border-gray-300' />
         </div>
         <div className='relative flex justify-center'>
-          <span className='bg-white px-2 text-sm text-gray-500'>Or continue with</span>
+          <span className='bg-white px-2 text-sm text-gray-500'>
+            Or continue with
+          </span>
         </div>
       </div>
       <div className='flex gap-2'>
@@ -93,7 +109,11 @@ const AuthForm = () => {
         <SocialButton icon={BsGoogle} onClick={() => onSocialClick('google')} />
       </div>
       <div className='flex justify-center gap-2 px-2 text-sm text-gray-500'>
-        <div>{variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
+        <div>
+          {variant === 'LOGIN'
+            ? 'New to Messenger?'
+            : 'Already have an account?'}
+        </div>
         <div onClick={toggle} className='cursor-pointer underline'>
           {variant === 'LOGIN' ? 'Create an account' : 'Login'}
         </div>

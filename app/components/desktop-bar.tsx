@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import Avatar from '@/app/components/Avatar';
+import Avatar from '@/app/components/avatar';
 import useRoutes from '@/app/hooks/useRoutes';
 import { Routes } from '@/app/hooks/useRoutes';
 
