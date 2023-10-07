@@ -17,12 +17,13 @@ const MobileItem: React.FC<MobileItemProps> = ({
 }) => {
   return (
     <li
+      onClick={onClick}
       className={clsx(
         'flex-1 text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-gray-900',
         active && 'bg-gray-100 text-gray-900'
       )}
     >
-      <Link href={href} className=''>
+      <Link href={href} className='block p-4'>
         <Icon className='mx-auto h-6 w-6' />
         <span className='sr-only'>{label}</span>
       </Link>

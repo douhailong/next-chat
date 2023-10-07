@@ -4,6 +4,7 @@ interface AvatarProps {
   avatar?: string;
   active?: boolean;
 }
+
 const Avatar: React.FC<AvatarProps> = ({ avatar, active }) => {
   return (
     <div className='relative'>

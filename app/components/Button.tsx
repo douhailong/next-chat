@@ -2,12 +2,9 @@
 
 import clsx from 'clsx';
 
-export type ButtonHTMLType =
-  React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
-
-interface ButtonProps {
+export interface ButtonProps {
   type?: 'default' | 'danger' | 'primary' | 'text';
-  htmlType?: ButtonHTMLType;
+  htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   children?: React.ReactNode;
   block?: boolean;
   disabled?: boolean;
