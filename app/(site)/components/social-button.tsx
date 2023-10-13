@@ -6,6 +6,7 @@ interface SocialButtonProps {
   icon: IconType;
   onClick?: () => void;
 }
+
 const SocialButton: React.FC<SocialButtonProps> = ({ icon: Icon, onClick }) => {
   return (
     <button

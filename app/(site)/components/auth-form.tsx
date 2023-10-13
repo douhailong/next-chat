@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
+import { SignInResponse, signIn, useSession } from 'next-auth/react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { BsGithub, BsGoogle } from 'react-icons/bs';
 import { toast } from 'react-hot-toast';
@@ -16,6 +16,7 @@ import SocialButton from './social-button';
 const AuthForm = () => {
   const [variant, setVariant] = useState<'LOGIN' | 'REGISTER'>('LOGIN');
   const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
   const {
@@ -23,7 +24,7 @@ const AuthForm = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<FieldValues>({
-    defaultValues: { name: '', email: 'dou@qq.com', password: 'dou123' }
+    defaultValues: { email: 'dou1@qq.com', password: 'dou123' }
   });
 
   const toggle = useCallback(() => {
@@ -31,32 +32,33 @@ const AuthForm = () => {
   }, [variant]);
 
   const onSubmit: SubmitHandler<FieldValues> = (values) => {
-    console.log(values);
-    setIsLoading(true);
-    if (variant === 'LOGIN') {
-      signIn('credentials', { ...values, redirect: false }).then((res: any) => {
-        res.error && toast.error('Invalid credentials!');
-        res.ok && toast.success('success');
-        setIsLoading(false);
-      });
-    } else {
-      axios
-        .post('/api/register', values)
-        .then((res: any) => {
-          res.error && toast.error('Invalid credentials!');
-          res.ok && router.push('/conversations');
-        })
-        .catch(() => toast.error('Something went wrong!'))
-        .finally(() => setIsLoading(false));
+    function onSuccess(callback: SignInResponse | undefined) {
+      callback?.error && toast.error('Invalid credentials!');
+      callback?.ok && router.push('/conversations');
     }
+
+    setIsLoading(true);
+    variant === 'LOGIN'
+      ? signIn('credentials', { ...values, redirect: false })
+          .then(onSuccess)
+          .finally(() => setIsLoading(false))
+      : axios
+          .post('/api/register', values)
+          .then(() => {
+            signIn('credentials', { ...values, redirect: false }).then(
+              onSuccess
+            );
+          })
+          .catch(() => toast.error('Something went wrong!'))
+          .finally(() => setIsLoading(false));
   };
 
   const onSocialClick = (social: 'github' | 'google') => {
     setIsLoading(true);
     signIn(social, { redirect: false })
-      .then((res: any) => {
-        res.error && toast.error('Invalid credentials!');
-        res.ok && router.push('/conversations');
+      .then((callback) => {
+        callback?.error && toast.error('Invalid credentials!');
+        callback?.ok && router.push('/conversations');
       })
       .finally(() => setIsLoading(false));
   };

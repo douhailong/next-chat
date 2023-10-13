@@ -4,7 +4,8 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 import useRoutes from '@/app/hooks/useRoutes';
-import { Routes } from '@/app/hooks/useRoutes';
+import type { Routes } from '@/app/hooks/useRoutes';
+import useConversation from '@/app/hooks/useConversation';
 
 interface MobileItemProps extends Routes {}
 
@@ -15,6 +16,10 @@ const MobileItem: React.FC<MobileItemProps> = ({
   onClick,
   active
 }) => {
+  const [isOpen] = useConversation();
+
+  if (isOpen) return null;
+  
   return (
     <li
       onClick={onClick}
@@ -35,7 +40,7 @@ const MobileBar = () => {
   const routes = useRoutes();
 
   return (
-    <div className='fixed bottom-0 z-40 w-full border-t-[1px] bg-white lg:hidden'>
+    <div className='fixed bottom-0 z-40 w-full border-t bg-white lg:hidden'>
       <ul role='list' className='flex'>
         {routes.map((item) => (
           <MobileItem

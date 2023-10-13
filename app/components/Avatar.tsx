@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 interface AvatarProps {
-  avatar?: string;
+  avatar?: string | null;
   active?: boolean;
 }
 

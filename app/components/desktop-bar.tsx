@@ -36,7 +36,7 @@ const DesktopBar = () => {
   const routes = useRoutes();
 
   return (
-    <div className='fixed inset-y-0 left-0 flex w-20 flex-col justify-between overflow-y-auto border-r-[1px] bg-white py-4 max-lg:hidden'>
+    <div className='fixed inset-y-0 left-0 flex w-20 flex-col justify-between overflow-y-auto border-r bg-white py-4 max-lg:hidden'>
       <nav>
         <ul role='list' className='flex flex-col items-center space-y-1'>
           {routes.map((item) => (

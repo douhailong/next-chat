@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 import { HiChat } from 'react-icons/hi';
 import { HiArrowLeftOnRectangle, HiUsers } from 'react-icons/hi2';
-import { signOut } from 'next-auth/react';
 import { IconType } from 'react-icons';
+
 import useConversation from './useConversation';
 
 export interface Routes {
@@ -16,7 +17,7 @@ export interface Routes {
 
 export default function useRoutes(): Routes[] {
   const pathname = usePathname();
-  const [isOpen, conversationId] = useConversation();
+  const [, conversationId] = useConversation();
 
   const routes: Routes[] = useMemo(
     () => [
