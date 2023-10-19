@@ -31,9 +31,7 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
 
   const lastMessageText = lastMessage?.image
     ? 'Sent an image'
-    : lastMessage?.body
-    ? lastMessage?.body
-    : 'Started a conversation';
+    : lastMessage?.body || 'Started a conversation';
 
   return (
     <div
@@ -43,12 +41,12 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
       )}
       onClick={onClick}
     >
-      <Avatar avatar={restMembers.image} />
+      <Avatar avatar={restMembers?.image} />
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
           <div className='mb-1 flex items-center justify-between'>
             <p className='text-sm font-medium text-gray-900'>
-              {conversation.name || restMembers.name}
+              {conversation?.name || restMembers?.name}
             </p>
             {lastMessage?.createdAt && (
               <p className='text-xs font-light text-gray-400'>

@@ -5,9 +5,18 @@ import { HiChevronLeft } from 'react-icons/hi';
 import { HiEllipsisHorizontal } from 'react-icons/hi2';
 
 import Avatar from '@/app/components/avatar';
+import useRestMembers from '@/app/hooks/useRestMembers';
+import type { Conversation, User } from '@prisma/client';
 
+interface HeaderProps {
+  conversation: Conversation & {
+    users: User[];
+  };
+}
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ conversation }) => {
+  const restMembers = useRestMembers(conversation);
+
   return (
     <div className='flex items-center justify-between border-b px-4 py-3 shadow-sm lg:px-6'>
       <div className='flex items-center gap-3'>
@@ -18,6 +27,10 @@ const Header = () => {
           <HiChevronLeft size={32} />
         </Link>
         <Avatar active />
+        <div className='flex flex-col'>
+          <div>{conversation.name || restMembers.name}</div>
+          <div>active</div>
+        </div>
       </div>
       <HiEllipsisHorizontal
         size={32}

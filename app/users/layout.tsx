@@ -2,11 +2,11 @@ import Sidebar from '@/app/components/side-bar';
 import UserList from './components/user-list';
 import getUsers from '@/app/_utils/getUsers';
 
-export default async function UsersLayout({
-  children
-}: {
+interface UsersLayout {
   children: React.ReactNode;
-}) {
+}
+
+const UsersLayout: React.FC<UsersLayout> = async ({ children }) => {
   const users = await getUsers();
 
   return (
@@ -15,4 +15,6 @@ export default async function UsersLayout({
       <div className='h-full'>{children}</div>
     </Sidebar>
   );
-}
+};
+
+export default UsersLayout;

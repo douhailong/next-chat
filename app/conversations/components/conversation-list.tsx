@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Conversation, User } from '@prisma/client';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
 import ConversationItem from './conversation-item';
 import useConversation from '@/app/hooks/useConversation';
+import type { Conversation, User } from '@prisma/client';
 import type { ConversationType } from '@/app/types';
 
 interface ConversationListProps {
-  conversations: ConversationType[] | null;
-  users: User[] | null;
+  conversations: ConversationType[];
+  users: User[];
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({

@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import Avatar from '@/app/components/avatar';
-import { User } from '@prisma/client';
 import useActiveMembers from '@/app/hooks/useMembers';
+import type { User } from '@prisma/client';
 
 interface UserItemProps {
   user: User;

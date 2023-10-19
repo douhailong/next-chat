@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const { email, name, password } = await request.json();
 
     if (!email || !name || !password) {
-      return new NextResponse('Missing info', { status: 400 });
+      return new NextResponse('Missing data', { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -17,8 +17,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(user);
-  } catch (err) {
-    console.log('REGISTER_ERROR:', err);
-    return new NextResponse('Internal error', { status: 500 });
+  } catch (error) {
+    console.log('REGISTER_ERROR:', error);
+    return new NextResponse('Internal Error', { status: 500 });
   }
 }

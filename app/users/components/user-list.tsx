@@ -1,8 +1,10 @@
-import { User } from '@prisma/client';
+'use client';
+
 import UserItem from './user-item';
+import type { User } from '@prisma/client';
 
 interface UserListProps {
-  users: User[] | null;
+  users: User[];
 }
 
 const UserList: React.FC<UserListProps> = ({ users }) => {

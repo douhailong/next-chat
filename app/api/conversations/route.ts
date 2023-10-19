@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server';
+
 import prisma from '@/app/libs/prisma';
 import getCurrentUser from '@/app/_utils/getCurrentUser';
 
 export async function POST(request: Request) {
   try {
-    const currentUser = await getCurrentUser();
     const { userId, isGroup, members, name } = await request.json();
+    const currentUser = await getCurrentUser();
 
     if (!currentUser?.id || !currentUser?.email) {
-      return new NextResponse('Unauthorized', { status: 400 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
     if (isGroup && (!members || members.length < 2 || !name)) {
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
     //   return NextResponse.json(converation);
     // }
 
-    const existingConversations = await prisma.conversation.findMany({
+    const currentConversations = await prisma.conversation.findMany({
       where: {
         OR: [
           {
@@ -56,13 +57,11 @@ export async function POST(request: Request) {
       }
     });
 
-    const singleConversation = existingConversations[0];
-
-    if (singleConversation) {
-      return NextResponse.json(singleConversation);
+    if (currentConversations[0]) {
+      return NextResponse.json(currentConversations[0]);
     }
 
-    const newConversation = await prisma.conversation.create({
+    const conversation = await prisma.conversation.create({
       data: {
         users: {
           connect: [
@@ -80,8 +79,9 @@ export async function POST(request: Request) {
       }
     });
 
-    return NextResponse.json(newConversation);
+    return NextResponse.json(conversation);
   } catch (error) {
+    console.log('CONVERSATIONS_ERROR:', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }

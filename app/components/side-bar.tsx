@@ -1,7 +1,11 @@
 import DesktopBar from '@/app/components/desktop-bar';
 import MobileBar from '@/app/components/mobile-bar';
 
-const Sidebar = ({ children }: { children: React.ReactNode }) => {
+interface SidebarProps {
+  children: React.ReactNode;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   return (
     <div className='h-full'>
       <DesktopBar />

@@ -7,7 +7,7 @@ export default async function getConversations() {
 
     if (!currentUser?.id) return [];
 
-    const conversations = prisma.conversation.findMany({
+    return await prisma.conversation.findMany({
       orderBy: { lastMessageAt: 'desc' },
       where: { userIds: { has: currentUser?.id } },
       include: {
@@ -20,8 +20,6 @@ export default async function getConversations() {
         }
       }
     });
-
-    return conversations;
   } catch (error) {
     return [];
   }
