@@ -1,5 +1,3 @@
-'use client';
-
 import UserItem from './user-item';
 import type { User } from '@prisma/client';
 

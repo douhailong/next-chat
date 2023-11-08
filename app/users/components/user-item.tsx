@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import Avatar from '@/app/components/avatar';
+import Loading from '@/app/components/loading';
 import useActiveMembers from '@/app/hooks/useMembers';
 import type { User } from '@prisma/client';
 
@@ -14,8 +15,8 @@ interface UserItemProps {
 
 const UserItem: React.FC<UserItemProps> = ({ user }) => {
   const [isLoading, setIsloading] = useState(false);
-
   const router = useRouter();
+
   const { members } = useActiveMembers();
 
   const isActive = members.includes(user.id);
@@ -29,19 +30,22 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
   };
 
   return (
-    <div
-      className='flex cursor-pointer items-center space-x-3 rounded-lg bg-white p-3 hover:bg-neutral-100'
-      onClick={onClick}
-    >
-      <Avatar avatar={user.image} active={isActive} />
-      <div className='min-w-0 flex-1'>
-        <div className='focus:outline-none'>
-          <div className='mb-1 flex items-center justify-between'>
-            <p className='text-sm font-medium text-gray-900'>{user.name}</p>
+    <>
+      {isLoading && <Loading />}
+      <div
+        className='flex cursor-pointer items-center space-x-3 rounded-lg bg-white p-3 hover:bg-neutral-100'
+        onClick={onClick}
+      >
+        <Avatar avatar={user.image} active={isActive} />
+        <div className='min-w-0 flex-1'>
+          <div className='focus:outline-none'>
+            <div className='mb-1 flex items-center justify-between'>
+              <p className='text-sm font-medium text-gray-900'>{user.name}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

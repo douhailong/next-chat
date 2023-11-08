@@ -1,11 +1,16 @@
 import Image from 'next/image';
+import { User } from 'prisma/prisma-client';
 
 interface AvatarProps {
   avatar?: string | null;
   active?: boolean;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ avatar, active }) => {
+interface GroupProps {
+  avatars: string[];
+}
+
+const Avatar = ({ avatar, active }: AvatarProps) => {
   return (
     <div className='relative'>
       <div className='relative inline-block h-9 w-9 overflow-hidden rounded-full'>
@@ -17,5 +22,30 @@ const Avatar: React.FC<AvatarProps> = ({ avatar, active }) => {
     </div>
   );
 };
+
+const Group: React.FC<GroupProps> = ({ avatars }) => {
+  const position = {
+    0: 'top-0 left-[12px]',
+    1: 'bottom-0',
+    2: 'bottom-0 right-0'
+  };
+
+  return (
+    <div className='relative h-11 w-11'>
+      {avatars.map((avatar, index) => (
+        <div
+          key={avatar}
+          className={`absolute inline-block h-[21px] w-[21px] overflow-hidden rounded-full ${
+            position[index as keyof typeof position]
+          }`}
+        >
+          <Image fill src={avatar || '/images/placeholder.jpg'} alt='Avatar' />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+Avatar.Group = Group;
 
 export default Avatar;

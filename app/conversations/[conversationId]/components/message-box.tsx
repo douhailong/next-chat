@@ -45,6 +45,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
               src={message.image}
               width={288}
               height={288}
+              unoptimized={true}
               className='translate cursor-pointer object-cover transition hover:scale-110'
             />
           ) : (

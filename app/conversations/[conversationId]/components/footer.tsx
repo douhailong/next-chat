@@ -18,7 +18,7 @@ const Body = () => {
 
   const inputId = 'message';
 
-  const onUpload = (result: CldUploadWidgetResults) => {
+  const onUpload = (result: any) => {
     axios.post('/api/messages', {
       image: result?.info?.secure_url,
       conversationId
@@ -35,7 +35,7 @@ const Body = () => {
       <CldUploadButton
         options={{ maxFiles: 1 }}
         onUpload={onUpload}
-        uploadPreset='pgc9ehd5'
+        uploadPreset='dmz5aqf7'
       >
         <HiPhoto size={30} className='text-sky-500' />
       </CldUploadButton>

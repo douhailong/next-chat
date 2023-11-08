@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import Avatar from '@/app/components/avatar';
 import useRestMembers from '@/app/hooks/useRestMembers';
 import type { ConversationType } from '@/app/types';
+import { useMemo } from 'react';
+import useActiveMembers from '@/app/hooks/useMembers';
 
 interface ConversationItemProps {
   conversation: ConversationType;
@@ -19,11 +21,12 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
 }) => {
   const router = useRouter();
   const params = useParams();
+
   const restMembers = useRestMembers(conversation);
+  const { members } = useActiveMembers();
 
   const onClick = () => {
     if (params?.conversationId === conversation.id) return;
-
     router.push(`/conversations/${conversation.id}`);
   };
 
@@ -33,6 +36,12 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
     ? 'Sent an image'
     : lastMessage?.body || 'Started a conversation';
 
+  const avatars: string[] = useMemo(() => {
+    return conversation.users?.map?.((user) => user.image || '').slice(0, 3);
+  }, [conversation.users]);
+
+  const isActive = members.includes(restMembers?.id);
+
   return (
     <div
       className={clsx(
@@ -41,7 +50,12 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
       )}
       onClick={onClick}
     >
-      <Avatar avatar={restMembers?.image} />
+      {conversation.isGroup ? (
+        <Avatar.Group avatars={avatars} />
+      ) : (
+        <Avatar avatar={restMembers?.image} active={isActive} />
+      )}
+
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
           <div className='mb-1 flex items-center justify-between'>
