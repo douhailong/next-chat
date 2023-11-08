@@ -1,5 +1,6 @@
 {
   "name": "next-chat",
+  "description": "Nextjs React Prisma Mongodb Next-Auth Pusher Tailwind",
   "version": "0.1.0",
   "private": true,
   "scripts": {
