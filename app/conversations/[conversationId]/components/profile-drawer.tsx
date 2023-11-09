@@ -5,6 +5,8 @@ import { IoClose, IoTrash } from 'react-icons/io5';
 import Avatar from '@/app/components/avatar';
 import { format } from 'date-fns';
 import useRestMembers from '@/app/hooks/useRestMembers';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 interface ProfileDrawerProps {
   onClose: () => void;
@@ -17,9 +19,21 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
   conversation,
   onClose
 }) => {
+  const router = useRouter();
   const resetMembers = useRestMembers(conversation);
 
   const isGroup = conversation.isGroup;
+
+  function onDelete() {
+    console.log(conversation.id, ',,,,,,,,');
+    axios
+      .delete(`/api/conversations/${conversation.id}`)
+      .then((res) => {
+        console.log(res, '000000000000');
+        router.push('/conversations');
+      })
+      .catch((err) => {});
+  }
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -75,7 +89,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                         {isGroup ? conversation.name : resetMembers.name}
                       </div>
                       <div className='text-sm text-gray-500'>{'Active'}</div>
-                      <div className='my-8 flex cursor-pointer flex-col items-center justify-center gap-3 hover:opacity-75'>
+                      <div
+                        className='my-8 flex cursor-pointer flex-col items-center justify-center gap-3 hover:opacity-75'
+                        onClick={() => onDelete()}
+                      >
                         <div className='flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600'>
                           <IoTrash size={20} />
                         </div>
