@@ -7,11 +7,12 @@ import clsx from 'clsx';
 import { format } from 'date-fns';
 
 import Avatar from '@/app/components/avatar';
+import ImageModal from './image-modal';
 import type { MessageType } from '@/app/types';
 
-type MessageBoxProps= {
+type MessageBoxProps = {
   message: MessageType;
-}
+};
 
 const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
   const [isOpen, setIsopen] = useState(false);
@@ -39,8 +40,14 @@ const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
             !message.image && 'px-3 py-2'
           )}
         >
+          <ImageModal
+            src={message.image || ''}
+            open={isOpen}
+            onClose={() => setIsopen(false)}
+          />
           {message.image ? (
             <Image
+              onClick={() => setIsopen(true)}
               alt='image'
               src={message.image}
               width={288}

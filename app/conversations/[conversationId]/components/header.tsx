@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
     <>
       <ProfileDrawer
         conversation={conversation}
-        isOpen={isOpen}
+        open={isOpen}
         onClose={() => setIsOpen(false)}
       />
       <div className='flex items-center justify-between border-b px-4 py-3 shadow-sm lg:px-6'>

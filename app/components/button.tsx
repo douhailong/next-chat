@@ -25,11 +25,11 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        'flex items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+        'flex items-center justify-center rounded-md px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
         type === 'danger' &&
           'bg-rose-500 hover:bg-red-600 focus-visible:outline-rose-600',
         type === 'primary' && 'bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600',
-        type === 'default' && 'text-black',
+        type === ('default' || 'text') ? 'text-gray-900' : 'text-white',
         disabled && 'cursor-default opacity-50',
         block && 'w-full'
       )}
