@@ -2,11 +2,11 @@ import Sidebar from '@/app/components/side-bar';
 import UserList from './components/user-list';
 import getUsers from '@/app/_utils/getUsers';
 
-interface UsersLayout {
+type UsersLayoutProps = {
   children: React.ReactNode;
-}
+};
 
-const UsersLayout: React.FC<UsersLayout> = async ({ children }) => {
+const UsersLayout: React.FC<UsersLayoutProps> = async ({ children }) => {
   const users = await getUsers();
 
   return (

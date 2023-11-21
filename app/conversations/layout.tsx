@@ -3,11 +3,11 @@ import ConversationList from './components/conversation-list';
 import getUsers from '@/app/_utils/getUsers';
 import getConversations from '@/app/_utils/getConversations';
 
-const ConversationsLayout = async ({
-  children
-}: {
+type ConversationsLayoutProps = {
   children: React.ReactNode;
-}) => {
+};
+
+const ConversationsLayout: React.FC<ConversationsLayoutProps> = async ({ children }) => {
   const users = await getUsers();
   const conversations = await getConversations();
 

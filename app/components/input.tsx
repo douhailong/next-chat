@@ -4,11 +4,12 @@ import { forwardRef, ForwardRefRenderFunction } from 'react';
 import clsx from 'clsx';
 
 export type InputHTMLType = React.InputHTMLAttributes<HTMLInputElement>['type'];
-export interface InputProps {
+export type InputProps= {
   disabled?: boolean;
   error?: boolean;
   placeholder?: string;
   value?: string;
+  defaultValue?: string;
   type?: InputHTMLType;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 }

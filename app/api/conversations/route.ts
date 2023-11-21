@@ -80,8 +80,7 @@ export async function POST(request: Request) {
     });
 
     conversation.users.forEach((user) => {
-      user.email &&
-        pusherServer.trigger(user.email, 'conversation:create', conversation);
+      user.email && pusherServer.trigger(user.email, 'conversation:create', conversation);
     });
 
     return NextResponse.json(conversation);

@@ -8,7 +8,7 @@ import useRestMembers from '@/app/hooks/useRestMembers';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-interface ProfileDrawerProps {
+type ProfileDrawerProps= {
   onClose: () => void;
   isOpen: boolean;
   conversation: Conversation & { users: User[] };
@@ -85,9 +85,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                           <Avatar avatar={resetMembers.image} />
                         )}
                       </div>
-                      <div>
-                        {isGroup ? conversation.name : resetMembers.name}
-                      </div>
+                      <div>{isGroup ? conversation.name : resetMembers.name}</div>
                       <div className='text-sm text-gray-500'>{'Active'}</div>
                       <div
                         className='my-8 flex cursor-pointer flex-col items-center justify-center gap-3 hover:opacity-75'
@@ -104,21 +102,15 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                         </div>
                         <div className='text-sm text-gray-600'>
                           {isGroup
-                            ? conversation.users
-                                .map((user) => user.email)
-                                .join(', ')
+                            ? conversation.users.map((user) => user.email).join(', ')
                             : resetMembers.email}
                         </div>
                         <hr className='my-4' />
-                        <div className='text-sm font-medium text-gray-500'>
-                          Joined on
-                        </div>
+                        <div className='text-sm font-medium text-gray-500'>Joined on</div>
                         <div className='text-sm text-gray-600'>
                           {format(
                             new Date(
-                              isGroup
-                                ? conversation.createdAt
-                                : resetMembers.createdAt
+                              isGroup ? conversation.createdAt : resetMembers.createdAt
                             ),
                             'PP'
                           )}

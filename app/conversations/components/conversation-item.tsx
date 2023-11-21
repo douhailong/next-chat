@@ -1,19 +1,19 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { format } from 'date-fns';
 import clsx from 'clsx';
 
 import Avatar from '@/app/components/avatar';
 import useRestMembers from '@/app/hooks/useRestMembers';
-import type { ConversationType } from '@/app/types';
-import { useMemo } from 'react';
 import useActiveMembers from '@/app/hooks/useMembers';
+import type { ConversationType } from '@/app/types';
 
-interface ConversationItemProps {
+type ConversationItemProps = {
   conversation: ConversationType;
   selected: boolean;
-}
+};
 
 const ConversationItem: React.FC<ConversationItemProps> = ({
   conversation,
@@ -21,7 +21,6 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
 }) => {
   const router = useRouter();
   const params = useParams();
-
   const restMembers = useRestMembers(conversation);
   const { members } = useActiveMembers();
 
@@ -30,17 +29,15 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
     router.push(`/conversations/${conversation.id}`);
   };
 
-  const lastMessage = conversation.messages?.[conversation.messages.length - 1];
-
-  const lastMessageText = lastMessage?.image
-    ? 'Sent an image'
-    : lastMessage?.body || 'Started a conversation';
-
   const avatars: string[] = useMemo(() => {
     return conversation.users?.map?.((user) => user.image || '').slice(0, 3);
   }, [conversation.users]);
 
   const isActive = members.includes(restMembers?.id);
+  const lastMessage = conversation.messages?.[conversation.messages.length - 1];
+  const lastMessageText = lastMessage?.image
+    ? 'Sent an image'
+    : lastMessage?.body || 'Started a conversation';
 
   return (
     <div
@@ -68,9 +65,7 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
               </p>
             )}
           </div>
-          <p className={clsx('truncate text-sm text-gray-400')}>
-            {lastMessageText}
-          </p>
+          <p className={clsx('truncate text-sm text-gray-400')}>{lastMessageText}</p>
         </div>
       </div>
     </div>

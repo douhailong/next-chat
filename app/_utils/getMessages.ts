@@ -4,8 +4,8 @@ export default async function getMessages(conversationId: string) {
   try {
     return await prisma.message.findMany({
       where: { conversationId },
-      include: { sender: true, seen: true },
-      orderBy: { createdAt: 'asc' }
+      orderBy: { createdAt: 'asc' },
+      include: { sender: true, seen: true }
     });
   } catch (error) {
     return [];

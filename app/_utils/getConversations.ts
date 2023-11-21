@@ -8,8 +8,8 @@ export default async function getConversations() {
     if (!currentUser?.id) return [];
 
     return await prisma.conversation.findMany({
-      orderBy: { lastMessageAt: 'desc' },
       where: { userIds: { has: currentUser?.id } },
+      orderBy: { lastMessageAt: 'desc' },
       include: {
         users: true,
         messages: {

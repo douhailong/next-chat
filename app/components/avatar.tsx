@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import { User } from 'prisma/prisma-client';
 
-interface AvatarProps {
+type AvatarProps = {
   avatar?: string | null;
   active?: boolean;
-}
+};
 
-interface GroupProps {
+type GroupProps = {
   avatars: string[];
-}
+};
 
 const Avatar = ({ avatar, active }: AvatarProps) => {
   return (

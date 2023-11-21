@@ -7,7 +7,7 @@ import { IconType } from 'react-icons';
 
 import useConversation from './useConversation';
 
-export interface Routes {
+export type Routes= {
   label: string;
   href: string;
   icon: IconType;

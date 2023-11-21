@@ -1,9 +1,9 @@
 import DesktopBar from '@/app/components/desktop-bar';
 import MobileBar from '@/app/components/mobile-bar';
 
-interface SidebarProps {
+type SidebarProps = {
   children: React.ReactNode;
-}
+};
 
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   return (

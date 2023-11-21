@@ -5,9 +5,9 @@ import Body from './components/body';
 import getConversationById from '@/app/_utils/getConverstionById';
 import getMessages from '@/app/_utils/getMessages';
 
-interface Params {
+type Params = {
   conversationId: string;
-}
+};
 
 const ConversationsId = async ({ params }: { params: Params }) => {
   const conversation = await getConversationById(params.conversationId);

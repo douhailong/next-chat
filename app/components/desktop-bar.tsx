@@ -7,7 +7,7 @@ import Avatar from '@/app/components/avatar';
 import useRoutes from '@/app/hooks/useRoutes';
 import type { Routes } from '@/app/hooks/useRoutes';
 
-interface DesktopItemProps extends Routes {}
+type DesktopItemProps = Routes;
 
 const DesktopItem: React.FC<DesktopItemProps> = ({
   label,

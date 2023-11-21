@@ -1,40 +1,37 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
 import Avatar from '@/app/components/avatar';
 import Loading from '@/app/components/loading';
 import useActiveMembers from '@/app/hooks/useMembers';
+import { conversationsRequest } from '@/app/services';
 import type { User } from '@prisma/client';
 
-interface UserItemProps {
+type UserItemProps = {
   user: User;
-}
+};
 
 const UserItem: React.FC<UserItemProps> = ({ user }) => {
-  const [isLoading, setIsloading] = useState(false);
   const router = useRouter();
-
   const { members } = useActiveMembers();
 
   const isActive = members.includes(user.id);
 
-  const onClick = () => {
-    setIsloading(true);
-    axios
-      .post('/api/conversations', { userId: user.id })
-      .then((res) => router.push(`/conversations/${res.data.id}`))
-      .finally(() => setIsloading(false));
-  };
+  const selectMutation = useMutation({
+    mutationFn: (data: { userId: string }) => conversationsRequest(data),
+    onSuccess(response) {
+      router.push(`/conversations/${response.data.id}`);
+    }
+  });
 
   return (
     <>
-      {isLoading && <Loading />}
+      {selectMutation.isPending && <Loading />}
       <div
         className='flex cursor-pointer items-center space-x-3 rounded-lg bg-white p-3 hover:bg-neutral-100'
-        onClick={onClick}
+        onClick={() => selectMutation.mutate({ userId: user.id })}
       >
         <Avatar avatar={user.image} active={isActive} />
         <div className='min-w-0 flex-1'>

@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 
 import getCurrentUser from '@/app/_utils/getCurrentUser';
 
-interface Params {
+type Params = {
   conversationId: string;
-}
+};
 
 export async function POST(request: Request, { params }: { params: Params }) {
   try {

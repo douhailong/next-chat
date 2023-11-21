@@ -57,11 +57,12 @@ export async function POST(request: Request) {
       updateConversation.messages[updateConversation.messages.length - 1];
 
     updateConversation.users.map((user) => {
-      user.email &&
+      if (user.email) {
         pusherServer.trigger(user.email, 'conversation:update', {
           id: conversationId,
           messages: [lastMessage]
         });
+      }
     });
 
     return NextResponse.json(newMessage);

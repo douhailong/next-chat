@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import AuthForm from './components/auth-form';
 
-const Home = () => {
+const AuthPage = () => {
   return (
     <div className='flex min-h-full flex-col justify-center bg-gray-100 pt-12 sm:px-6 lg:px-8'>
       <div className='w-full space-y-6 sm:m-auto sm:max-w-md'>
@@ -24,4 +24,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AuthPage;

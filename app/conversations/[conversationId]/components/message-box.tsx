@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 import Avatar from '@/app/components/avatar';
 import type { MessageType } from '@/app/types';
 
-interface MessageBoxProps {
+type MessageBoxProps= {
   message: MessageType;
 }
 

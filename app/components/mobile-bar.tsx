@@ -7,7 +7,7 @@ import useRoutes from '@/app/hooks/useRoutes';
 import type { Routes } from '@/app/hooks/useRoutes';
 import useConversation from '@/app/hooks/useConversation';
 
-interface MobileItemProps extends Routes {}
+type MobileItemProps = Routes 
 
 const MobileItem: React.FC<MobileItemProps> = ({
   label,
@@ -19,7 +19,7 @@ const MobileItem: React.FC<MobileItemProps> = ({
   const [isOpen] = useConversation();
 
   if (isOpen) return null;
-  
+
   return (
     <li
       onClick={onClick}

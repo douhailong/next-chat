@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import clsx from 'clsx';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import clsx from 'clsx';
 
 import ConversationItem from './conversation-item';
 import useConversation from '@/app/hooks/useConversation';
@@ -12,10 +12,10 @@ import { pusherClient } from '@/app/libs/pusher';
 import type { Conversation, User } from '@prisma/client';
 import type { ConversationType } from '@/app/types';
 
-interface ConversationListProps {
+type ConversationListProps = {
   conversations: ConversationType[];
   users: User[];
-}
+};
 
 const ConversationList: React.FC<ConversationListProps> = ({
   conversations: initialConversations,
@@ -33,26 +33,23 @@ const ConversationList: React.FC<ConversationListProps> = ({
   useEffect(() => {
     if (!pusherKey) return;
 
-    pusherClient.subscribe(pusherKey);
-
     function createCallback(conversation: ConversationType) {
       setConversations([conversation, ...conversations]);
     }
+
+    function removeCallback(conversation: ConversationType) {
+      setConversations([...conversations.filter((item) => item.id !== conversation.id)]);
+    }
+
     function updateCallback(conversation: ConversationType) {
       setConversations([
         ...conversations.map((item) =>
-          item.id === conversation.id
-            ? { ...conversation, messages: conversation.messages }
-            : item
+          item.id === conversation.id ? conversation : item
         )
       ]);
     }
-    function removeCallback(conversation: ConversationType) {
-      setConversations([
-        ...conversations.filter((item) => item.id !== conversation.id)
-      ]);
-    }
 
+    pusherClient.subscribe(pusherKey);
     pusherClient.bind('conversation:create', createCallback);
     pusherClient.bind('conversation:update', updateCallback);
     pusherClient.bind('conversation:remove', removeCallback);

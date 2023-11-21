@@ -3,3 +3,5 @@
 #### [Node版本 V18.14.1 Next-Auth 登录报错](https://stackoverflow.com/questions/76969812/typeerror-cookies-is-not-iterable-next-js)
 
 #### [Pusher 集群设置](https://pusher.com/docs/channels/miscellaneous/clusters/)
+
+#### [Pusher 8+ 版本](https://stackoverflow.com/questions/74909274/laravel-broadcasting-with-pusher-error-uncaught-options-object-must-provide-a)

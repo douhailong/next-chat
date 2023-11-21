@@ -11,11 +11,11 @@ import useRestMembers from '@/app/hooks/useRestMembers';
 import type { Conversation, User } from '@prisma/client';
 import useActiveMembers from '@/app/hooks/useMembers';
 
-interface HeaderProps {
+type HeaderProps = {
   conversation: Conversation & {
     users: User[];
   };
-}
+};
 
 const Header: React.FC<HeaderProps> = ({ conversation }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,9 +57,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           )}
           <div className='flex flex-col'>
             <div>{conversation.name || restMembers.name}</div>
-            <div className='text-sm font-light text-neutral-500'>
-              {statusText}
-            </div>
+            <div className='text-sm font-light text-neutral-500'>{statusText}</div>
           </div>
         </div>
         <HiEllipsisHorizontal

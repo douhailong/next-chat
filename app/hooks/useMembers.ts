@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface ActiveMembers {
+type ActiveMembers= {
   members: string[];
   add: (memberId: string) => void;
   remove: (memberId: string) => void;
@@ -9,8 +9,7 @@ interface ActiveMembers {
 
 const useActiveMembers = create<ActiveMembers>((set) => ({
   members: [],
-  add: (memberId) =>
-    set((store) => ({ members: [...store.members, memberId] })),
+  add: (memberId) => set((store) => ({ members: [...store.members, memberId] })),
   remove: (memberId) =>
     set((store) => ({
       members: store.members.filter((id) => id !== memberId)

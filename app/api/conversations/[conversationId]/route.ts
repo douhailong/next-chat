@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
+
 import prisma from '@/app/libs/prisma';
-
-import getCurrentUser from '@/app/_utils/getCurrentUser';
 import { pusherServer } from '@/app/libs/pusher';
+import getCurrentUser from '@/app/_utils/getCurrentUser';
 
-interface Params {
+type Params = {
   conversationId?: string;
-}
+};
 
 export async function DELETE(request: Request, { params }: { params: Params }) {
   try {
@@ -41,11 +41,7 @@ export async function DELETE(request: Request, { params }: { params: Params }) {
 
     existingConversation.users.forEach((user) => {
       if (user.email) {
-        pusherServer.trigger(
-          user.email,
-          'conversation:remove',
-          existingConversation
-        );
+        pusherServer.trigger(user.email, 'conversation:remove', existingConversation);
       }
     });
 

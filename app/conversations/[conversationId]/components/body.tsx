@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 import MessageBox from './message-box';
@@ -8,12 +8,13 @@ import useConversation from '@/app/hooks/useConversation';
 import { pusherClient } from '@/app/libs/pusher';
 import type { MessageType } from '@/app/types';
 
-interface BodyProps {
+type BodyProps = {
   messages: MessageType[];
-}
+};
 
 const Body: React.FC<BodyProps> = ({ messages: initMessages }) => {
   const [messages, setMessages] = useState(initMessages);
+  const viewRef = useRef<HTMLDivElement>(null);
 
   const [, conversationId] = useConversation();
 
@@ -23,13 +24,15 @@ const Body: React.FC<BodyProps> = ({ messages: initMessages }) => {
 
   useEffect(() => {
     pusherClient.subscribe(conversationId);
+    viewRef.current?.scrollIntoView();
 
     function createCallback(message: MessageType) {
-      setMessages([...messages, message]);
+      setMessages((pre) => [...pre, message]);
+      viewRef.current?.scrollIntoView();
     }
     function updateCallback(message: MessageType) {
-      setMessages([
-        ...messages.map((item) => (item.id === message.id ? message : item))
+      setMessages((pre) => [
+        ...pre.map((item) => (item.id === message.id ? message : item))
       ]);
     }
 
@@ -48,6 +51,7 @@ const Body: React.FC<BodyProps> = ({ messages: initMessages }) => {
       {messages.map((message) => (
         <MessageBox key={message.id} message={message} />
       ))}
+      <div className='pt-24' ref={viewRef}></div>
     </div>
   );
 };

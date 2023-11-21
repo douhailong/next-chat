@@ -5,6 +5,7 @@ import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import { HiPaperAirplane, HiPhoto } from 'react-icons/hi2';
 import axios from 'axios';
 
+import Form from '@/app/components/form';
 import useConversation from '@/app/hooks/useConversation';
 
 const Body = () => {
@@ -14,7 +15,7 @@ const Body = () => {
     setValue,
     formState: { errors }
   } = useForm<FieldValues>({ defaultValues: { message: '' } });
-  const [isOpen, conversationId] = useConversation();
+  const [_, conversationId] = useConversation();
 
   const inputId = 'message';
 
