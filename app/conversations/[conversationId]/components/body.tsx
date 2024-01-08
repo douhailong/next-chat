@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
 
-import MessageBox from './message-box';
 import useConversation from '@/app/hooks/useConversation';
 import { pusherClient } from '@/app/libs/pusher';
 import type { MessageType } from '@/app/types';
+import MessageBox from './message-box';
 
 type BodyProps = {
   messages: MessageType[];

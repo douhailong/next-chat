@@ -1,7 +1,7 @@
 'use client';
 
+import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { Transition, Dialog } from '@headlessui/react';
 import { ClipLoader } from 'react-spinners';
 
 const Loading = () => {

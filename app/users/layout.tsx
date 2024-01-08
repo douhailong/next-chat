@@ -1,6 +1,6 @@
+import getUsers from '@/app/_utils/getUsers';
 import Sidebar from '@/app/components/side-bar';
 import UserList from './components/user-list';
-import getUsers from '@/app/_utils/getUsers';
 
 type UsersLayoutProps = {
   children: React.ReactNode;

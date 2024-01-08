@@ -1,9 +1,9 @@
-import Empty from '@/app/components/empty';
-import Header from './components/header';
-import Footer from './components/footer';
-import Body from './components/body';
 import getConversationById from '@/app/_utils/getConverstionById';
 import getMessages from '@/app/_utils/getMessages';
+import Empty from '@/app/components/empty';
+import Body from './components/body';
+import Footer from './components/footer';
+import Header from './components/header';
 
 type Params = {
   conversationId: string;

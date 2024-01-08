@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react';
-import Modal from './modal';
-import Button from './button';
 import { FiAlertTriangle } from 'react-icons/fi';
+import Button from '../button';
+import Modal from './modal';
 
 type ConfirmModalProps = {
   open?: boolean;

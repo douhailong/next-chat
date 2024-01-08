@@ -1,16 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { MdOutlineGroupAdd } from 'react-icons/md';
+import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import { MdOutlineGroupAdd } from 'react-icons/md';
 
-import ConversationItem from './conversation-item';
+import { Modal } from '@/app/components/modal';
 import useConversation from '@/app/hooks/useConversation';
 import { pusherClient } from '@/app/libs/pusher';
-import type { Conversation, User } from '@prisma/client';
 import type { ConversationType } from '@/app/types';
+import type { User } from '@prisma/client';
+import ConversationItem from './conversation-item';
 
 type ConversationListProps = {
   conversations: ConversationType[];
@@ -22,11 +23,11 @@ const ConversationList: React.FC<ConversationListProps> = ({
   users
 }) => {
   const [conversations, setConversations] = useState(initialConversations);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const session = useSession();
-  const [isOpen, conversationId] = useConversation();
+  const [open, conversationId] = useConversation();
 
   const pusherKey = session.data?.user?.email;
 
@@ -38,7 +39,9 @@ const ConversationList: React.FC<ConversationListProps> = ({
     }
 
     function removeCallback(conversation: ConversationType) {
-      setConversations([...conversations.filter((item) => item.id !== conversation.id)]);
+      setConversations([
+        ...conversations.filter((item) => item.id !== conversation.id)
+      ]);
     }
 
     function updateCallback(conversation: ConversationType) {
@@ -63,31 +66,34 @@ const ConversationList: React.FC<ConversationListProps> = ({
   }, [pusherKey, router]);
 
   return (
-    <aside
-      className={clsx(
-        'overfloe-y-auto fixed inset-y-0 left-0 w-full border-r border-gray-200 pb-20 lg:left-20 lg:block lg:w-80 lg:pb-0',
-        isOpen && 'hidden'
-      )}
-    >
-      <div className='px-5'>
-        <div className='flex justify-between py-4'>
-          <h3 className='text-2xl font-bold text-neutral-800'>Message</h3>
-          <div
-            className='cursor-pointer rounded-xl bg-gray-100 p-2 text-gray-600 hover:opacity-75'
-            onClick={() => setIsModalOpen(true)}
-          >
-            <MdOutlineGroupAdd size={20} />
+    <>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} />
+      <aside
+        className={clsx(
+          'overfloe-y-auto fixed inset-y-0 left-0 w-full border-r border-gray-200 pb-20 lg:left-20 lg:block lg:w-80 lg:pb-0',
+          open && 'hidden'
+        )}
+      >
+        <div className='px-5'>
+          <div className='flex justify-between py-4'>
+            <h3 className='text-2xl font-bold text-neutral-800'>Message</h3>
+            <div
+              className='cursor-pointer rounded-xl bg-gray-100 p-2 text-gray-600 hover:opacity-75'
+              onClick={() => setIsOpen(true)}
+            >
+              <MdOutlineGroupAdd size={20} />
+            </div>
           </div>
+          {conversations?.map((conversation) => (
+            <ConversationItem
+              key={conversation.id}
+              conversation={conversation}
+              selected={conversation.id === conversationId}
+            />
+          ))}
         </div>
-        {conversations?.map((conversation) => (
-          <ConversationItem
-            key={conversation.id}
-            conversation={conversation}
-            selected={conversation.id === conversationId}
-          />
-        ))}
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 

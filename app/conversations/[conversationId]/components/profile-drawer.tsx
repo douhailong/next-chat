@@ -1,13 +1,13 @@
-import { Fragment, useState } from 'react';
+import Avatar from '@/app/components/avatar';
+import { ConfirmModal } from '@/app/components/modal';
+import useRestMembers from '@/app/hooks/useRestMembers';
 import { Dialog, Transition } from '@headlessui/react';
 import { Conversation, User } from '@prisma/client';
-import { IoClose, IoTrash } from 'react-icons/io5';
-import Avatar from '@/app/components/avatar';
-import ConfirmModal from '@/app/components/confirm-modal';
-import { format } from 'date-fns';
-import useRestMembers from '@/app/hooks/useRestMembers';
 import axios from 'axios';
+import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
+import { Fragment, useState } from 'react';
+import { IoClose, IoTrash } from 'react-icons/io5';
 
 type ProfileDrawerProps = {
   onClose: () => void;

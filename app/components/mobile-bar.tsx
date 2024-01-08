@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from 'next/link';
 
-import useRoutes from '@/app/hooks/useRoutes';
-import type { Routes } from '@/app/hooks/useRoutes';
 import useConversation from '@/app/hooks/useConversation';
+import type { Routes } from '@/app/hooks/useRoutes';
+import useRoutes from '@/app/hooks/useRoutes';
 
-type MobileItemProps = Routes 
+type MobileItemProps = Routes;
 
 const MobileItem: React.FC<MobileItemProps> = ({
   label,

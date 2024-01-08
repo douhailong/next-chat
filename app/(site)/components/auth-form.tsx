@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
-import { BsGithub, BsGoogle } from 'react-icons/bs';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { BsGithub, BsGoogle } from 'react-icons/bs';
 
+import Button from '@/app/components/button';
 import Form from '@/app/components/form';
 import Input from '@/app/components/input';
-import Button from '@/app/components/button';
-import SocialButton from './social-button';
 import { registerRequest } from '@/app/services';
+import SocialButton from './social-button';
 
 type FieldValues = {
   email: string;

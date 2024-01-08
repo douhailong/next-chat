@@ -1,14 +1,14 @@
 {
   "name": "next-chat",
-  "description": "Nextjs React Prisma Mongodb Next-Auth Pusher Tailwind",
   "version": "0.1.0",
   "private": true,
+  "description": "Nextjs React Prisma Mongodb Next-Auth Pusher Tailwind",
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "dev": "next dev",
     "lint": "next lint",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "start": "next start"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -46,6 +46,8 @@
     "@tailwindcss/forms": "^0.5.6",
     "@types/bcrypt": "^5.0.0",
     "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-packagejson": "^2.4.6",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "prisma": "^5.3.0"
   }

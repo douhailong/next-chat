@@ -1,7 +1,7 @@
+import getConversations from '@/app/_utils/getConversations';
+import getUsers from '@/app/_utils/getUsers';
 import Sidebar from '@/app/components/side-bar';
 import ConversationList from './components/conversation-list';
-import getUsers from '@/app/_utils/getUsers';
-import getConversations from '@/app/_utils/getConversations';
 
 type ConversationsLayoutProps = {
   children: React.ReactNode;

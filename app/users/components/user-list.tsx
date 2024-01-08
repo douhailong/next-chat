@@ -1,5 +1,5 @@
-import UserItem from './user-item';
 import type { User } from '@prisma/client';
+import UserItem from './user-item';
 
 type UserListProps = {
   users: User[];

@@ -1,10 +1,10 @@
 'use client';
 
-import { forwardRef, ForwardRefRenderFunction } from 'react';
 import clsx from 'clsx';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 
 export type InputHTMLType = React.InputHTMLAttributes<HTMLInputElement>['type'];
-export type InputProps= {
+export type InputProps = {
   disabled?: boolean;
   error?: boolean;
   placeholder?: string;
@@ -12,7 +12,7 @@ export type InputProps= {
   defaultValue?: string;
   type?: InputHTMLType;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
-}
+};
 
 const InternalInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { disabled, error, ...restProps },

@@ -1,13 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { format } from 'date-fns';
 import clsx from 'clsx';
+import { format } from 'date-fns';
+import { useParams, useRouter } from 'next/navigation';
+import { useMemo } from 'react';
 
 import Avatar from '@/app/components/avatar';
-import useRestMembers from '@/app/hooks/useRestMembers';
 import useActiveMembers from '@/app/hooks/useMembers';
+import useRestMembers from '@/app/hooks/useRestMembers';
 import type { ConversationType } from '@/app/types';
 
 type ConversationItemProps = {

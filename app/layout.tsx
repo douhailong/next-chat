@@ -1,9 +1,9 @@
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
-import type { Metadata } from 'next';
 
-import QueryProvider from '@/app/provider/query-provider';
 import AuthProvider from '@/app/provider/auth-provider';
+import QueryProvider from '@/app/provider/query-provider';
 import './globals.css';
 
 export const metadata: Metadata = {

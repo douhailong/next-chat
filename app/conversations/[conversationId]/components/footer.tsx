@@ -1,11 +1,10 @@
 'use client';
 
-import { CldUploadButton, CldUploadWidgetResults } from 'next-cloudinary';
-import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
-import { HiPaperAirplane, HiPhoto } from 'react-icons/hi2';
 import axios from 'axios';
+import { CldUploadButton } from 'next-cloudinary';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { HiPaperAirplane, HiPhoto } from 'react-icons/hi2';
 
-import Form from '@/app/components/form';
 import useConversation from '@/app/hooks/useConversation';
 
 const Body = () => {

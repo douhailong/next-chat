@@ -2,10 +2,11 @@
 
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import Avatar from '@/app/components/avatar';
-import useRoutes from '@/app/hooks/useRoutes';
-import type { Routes } from '@/app/hooks/useRoutes';
+import { Modal } from '@/app/components/modal';
+import useRoutes, { Routes } from '@/app/hooks/useRoutes';
 
 type DesktopItemProps = Routes;
 
@@ -33,30 +34,37 @@ const DesktopItem: React.FC<DesktopItemProps> = ({
 };
 
 const DesktopBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const routes = useRoutes();
 
   return (
-    <div className='fixed inset-y-0 left-0 flex w-20 flex-col justify-between overflow-y-auto border-r bg-white py-4 max-lg:hidden'>
-      <nav>
-        <ul role='list' className='flex flex-col items-center space-y-1'>
-          {routes.map((item) => (
-            <DesktopItem
-              key={item.label}
-              label={item.label}
-              href={item.href}
-              onClick={item?.onClick}
-              active={item?.active}
-              icon={item.icon}
-            />
-          ))}
-        </ul>
-      </nav>
-      <nav>
-        <div className='flex items-center justify-center'>
-          <Avatar active />
-        </div>
-      </nav>
-    </div>
+    <>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} />
+      <div className='fixed inset-y-0 left-0 flex w-20 flex-col justify-between overflow-y-auto border-r bg-white py-4 max-lg:hidden'>
+        <nav>
+          <ul role='list' className='flex flex-col items-center space-y-1'>
+            {routes.map((item) => (
+              <DesktopItem
+                key={item.label}
+                label={item.label}
+                href={item.href}
+                onClick={item?.onClick}
+                active={item?.active}
+                icon={item.icon}
+              />
+            ))}
+          </ul>
+        </nav>
+        <nav>
+          <div
+            className='flex items-center justify-center cursor-pointer hover:opacity-75'
+            onClick={() => setIsOpen(true)}
+          >
+            <Avatar active />
+          </div>
+        </nav>
+      </div>
+    </>
   );
 };
 

@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-type ActiveMembers= {
+type ActiveMembers = {
   members: string[];
   add: (memberId: string) => void;
   remove: (memberId: string) => void;
   set: (memberIds: string[]) => void;
-}
+};
 
 const useActiveMembers = create<ActiveMembers>((set) => ({
   members: [],

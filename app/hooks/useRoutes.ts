@@ -1,19 +1,19 @@
-import { useMemo } from 'react';
-import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
+import { useMemo } from 'react';
+import { IconType } from 'react-icons';
 import { HiChat } from 'react-icons/hi';
 import { HiArrowLeftOnRectangle, HiUsers } from 'react-icons/hi2';
-import { IconType } from 'react-icons';
 
 import useConversation from './useConversation';
 
-export type Routes= {
+export type Routes = {
   label: string;
   href: string;
   icon: IconType;
   active?: boolean;
   onClick?: () => void;
-}
+};
 
 export default function useRoutes(): Routes[] {
   const pathname = usePathname();

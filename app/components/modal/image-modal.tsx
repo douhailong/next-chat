@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Modal from '@/app/components/modal';
+import Modal from './modal';
 
 type ImageModalProps = {
   src: string;

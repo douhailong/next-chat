@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import clsx from 'clsx';
 import { format } from 'date-fns';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { useState } from 'react';
 
 import Avatar from '@/app/components/avatar';
-import ImageModal from './image-modal';
+import { ImageModal } from '@/app/components/modal';
 import type { MessageType } from '@/app/types';
 
 type MessageBoxProps = {
